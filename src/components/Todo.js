@@ -5,6 +5,7 @@ function Todo({ functionDelete, functionDone, todo }) {
   return (
     <div>
       {todo.map((thingsTodo, index) => {
+        console.log('hello');
         return (
           <div key={`${index}`}>
             <span>{thingsTodo.phrase}</span>
@@ -12,7 +13,7 @@ function Todo({ functionDelete, functionDone, todo }) {
               Delete
             </Button>
             <Button whatTodo={functionDone} index={index}>
-              Done
+              DonefunctionDone
             </Button>
           </div>
         );

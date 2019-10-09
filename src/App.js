@@ -25,8 +25,8 @@ class App extends Component {
     },
     passwordView: "password",
     buttonPasswordisabled: false,
-    visibleLogin: true,
-    visibleButtonTodo: false, 
+    visibleLogin: false,
+    visibleButtonTodo: true, 
   };
 
   handleChange = e => {
@@ -44,7 +44,7 @@ class App extends Component {
 
   handleSubmit = e => {
     e.preventdefault();
-    this.setState({ visibleLogin: this.visibleLogin}, {visibleButtonTodo: !this.visibleButtonTodo})
+    this.setState({ visibleLogin: !this.visibleLogin, visibleButtonTodo: !this.visibleButtonTodo})
     // if (errors) {
     // } else {
     //   fasidfa;
@@ -60,18 +60,19 @@ class App extends Component {
   };
 
   handlerAddClick = () => {
+  
+  };
+
+   handlerDeleteTodo = () => {};
+
+  handlerDoneTodo = () => {
     const { todo } = this.state;
-    const phrase = faker.company.catchPhrase.toString();
+    const phrase = faker.lorem.sentence(8);
+    console.log(phrase)
     const newTodo = [...todo, [phrase, true]];
     this.setState = { todo: newTodo };
   };
-
-  handleBlur = () => {
-    console.log("Blurrrrr");
-  };
-  handlerDeleteTodo = () => {};
-
-  handlerDoneTodo = () => {};
+  
 
   render() {
     const {
@@ -123,7 +124,7 @@ class App extends Component {
                 value="submit"
               />
               <button
-                title="Pasword reveal only 3  seconds"
+                title="Pasword reveal only 3 seconds"
                 disabled={buttonPasswordisabled}
                 onClick={this.handlePasswordView}
               >
