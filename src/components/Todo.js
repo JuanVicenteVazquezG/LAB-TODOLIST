@@ -13,7 +13,7 @@ function Todo({ functionDelete, functionDone, todo }) {
               Delete
             </Button>
             <Button whatTodo={functionDone} index={index}>
-              DonefunctionDone
+              Done
             </Button>
           </div>
         );

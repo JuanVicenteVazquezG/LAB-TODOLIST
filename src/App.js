@@ -5,7 +5,6 @@ import Button from "./components/Button";
 import Todo from "./components/Todo";
 import { min, securePass } from "./helpers";
 
-
 const validations = {
   username: min,
   password: securePass
@@ -26,7 +25,7 @@ class App extends Component {
     passwordView: "password",
     buttonPasswordisabled: false,
     visibleLogin: false,
-    visibleButtonTodo: true, 
+    visibleButtonTodo: true
   };
 
   handleChange = e => {
@@ -44,7 +43,10 @@ class App extends Component {
 
   handleSubmit = e => {
     e.preventdefault();
-    this.setState({ visibleLogin: !this.visibleLogin, visibleButtonTodo: !this.visibleButtonTodo})
+    this.setState({
+      visibleLogin: !this.visibleLogin,
+      visibleButtonTodo: !this.visibleButtonTodo
+    });
     // if (errors) {
     // } else {
     //   fasidfa;
@@ -59,20 +61,16 @@ class App extends Component {
     }, 3000);
   };
 
-  handlerAddClick = () => {
-  
-  };
-
-   handlerDeleteTodo = () => {};
+  handlerDeleteTodo = () => {};
 
   handlerDoneTodo = () => {
+    console.log('y llego hasta aqui')
     const { todo } = this.state;
-    const phrase = faker.lorem.sentence(8);
-    console.log(phrase)
+    const phrase = faker.lorem.sentence(5);
+    console.log("hello", phrase);
     const newTodo = [...todo, [phrase, true]];
     this.setState = { todo: newTodo };
   };
-  
 
   render() {
     const {
@@ -135,15 +133,21 @@ class App extends Component {
 
           {visibleButtonTodo && (
             <>
-              <Button whatTodo={this.handlerAddClick}>Add To-do</Button>
+              {/* <Button whatTodo={this.handlerAddClick}>Add To-do</Button> */}
               <br />
 
               <div>
-                <Todo
+                <form onSubmit=""> 
+                  <label>Title: </label>
+                  <input type="text"></input>
+                  <label>Description:</label>
+                  <input
+                </form> 
+                {/* <Todo
                   functionDelete={this.handlerDeleteTodo}
                   functionDone={this.handlerDoneTodo}
                   todo={this.state.todo}
-                ></Todo>
+                ></Todo> */}
               </div>
             </>
           )}
