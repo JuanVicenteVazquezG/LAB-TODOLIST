@@ -33,3 +33,9 @@
 br{
   height:10px;
 }
+
+input.error {
+  border: 1px solid tomato;
+  color: black;
+  background-color: rgb(240, 185, 183)
+}
