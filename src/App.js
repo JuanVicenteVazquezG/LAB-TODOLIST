@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import { min, securePass } from "./helpers";
 import Users from "./data/users";
+import Button from "./components/Button";
+import Todo from "./components/Todo";
+import todo from "./data/todo.json";
 
 const validations = {
   username: min,
@@ -19,12 +22,12 @@ class App extends Component {
       username: false,
       password: false
     },
-    passwordView: "password",
-    buttonPasswordisabled: false,
-    visibleLogin: true,
+    // passwordView: "password",
+    // buttonPasswordisabled: false,
+    // visibleLogin: true,
     visibleButtonTodo: true,
     users: [...Users],
-    todo: [],
+    todo: [...todo],
     errorUser: false,
     errorMessage: ""
   };
@@ -43,14 +46,16 @@ class App extends Component {
   };
 
   verifyLoginNPassword() {
-      const {
+    const {
       values: { username, password },
       users
     } = this.state;
-    console.log( users.filter(user => {
+    console.log(
+      users.filter(user => {
         return user.username === username;
-      }).password);
-      return false;
+      }).password
+    );
+    return false;
   }
 
   handleSubmit = e => {
@@ -63,7 +68,7 @@ class App extends Component {
         errorMessage: "User name or password are no correct"
       });
     } else {
-      console.log('all is correct')
+      console.log("all is correct");
       this.setState({
         visibleLogin: !this.visibleLogin,
         visibleButtonTodo: !this.visibleButtonTodo
@@ -79,34 +84,32 @@ class App extends Component {
     }, 3000);
   };
 
-  // handlerDoneTodo = () => {
-  //   console.log('y llego hasta aqui')
-  //   const { todo } = this.state;
-  //   const phrase = faker.lorem.sentence(5);
-  //   console.log("hello", phrase);
-  //   const newTodo = [...todo, [phrase, true]];
-  //   this.setState = { todo: newTodo };
-  // };
+  handleDeleteTask = () => {};
+
+  handleAddTask = (tasktodo, datetodo) => {
+    todo.push({"thingTodo":tasktodo,
+    "data": datetodo});
+  };
+
+  handleDoneTask = () => {};
 
   render() {
     const {
       values: { username, password },
-      errors: { username: errorUsername, password: errorPassword },
-      passwordView,
-      buttonPasswordisabled,
-      visibleLogin,
-      visibleButtonTodo
+      errors: { username: errorUsername, password: errorPassword }
+      // passwordView,
+      // buttonPasswordisabled,
+      // visibleLogin
     } = this.state;
 
     return (
       <div className="App">
-        {this.state.todo}
         <header className="App-header">
           <h1>TO-DO LIST</h1>
-          <p className={this.state.errorUser && "error"}>
+          {/* <p className={this.state.errorUser && "error"}>
             {this.state.errorMessage}
           </p>
-          {visibleLogin && (
+       
             <form className="wrapper" onSubmit={this.handleSubmit}>
               <div className="form-wrapper">
                 <label htmlFor="username">User name</label>
@@ -143,23 +146,14 @@ class App extends Component {
               >
                 👁
               </button>
-            </form>
-          )}
-
-          {visibleButtonTodo && (
-            <>
-              {/* <Button whatTodo={this.handlerAddClick}>Add To-do</Button> */}
-              <br />
-
-              <div>
-                {/* <Todo
-                  functionDelete={this.handlerDeleteTodo}
-                  functionDone={this.handlerDoneTodo}
-                  todo={this.state.todo}
-                ></Todo> */}
-              </div>
-            </>
-          )}
+            </form> */}
+          <Todo
+            todo={this.state.todo}
+            deleteFunction={this.handleDeleteTask}
+            addFunction={this.handleAddTask}
+            doneFunction={this.handleDoneTask}
+          />
+          
         </header>
       </div>
     );

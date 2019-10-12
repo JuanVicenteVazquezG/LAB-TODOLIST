@@ -1,23 +1,31 @@
 import React from "react";
 import Button from "./Button";
+import AddTodo from "./AddTodo";
 
-function Todo({ functionDelete, functionDone, todo }) {
+function Todo({ deleteFunction, doneFunction, addFunction, todo }) {
+
+
   return (
     <div>
-      {todo.map((thingsTodo, index) => {
-        console.log('hello');
-        return (
-          <div key={`${index}`}>
-            <span>{thingsTodo.phrase}</span>
-            <Button whatTodo={functionDelete} index={index}>
-              Delete
-            </Button>
-            <Button whatTodo={functionDone} index={index}>
-              Done
-            </Button>
-          </div>
-        );
-      })}
+      <Button children="Add TO-DO" />
+      <AddTodo whatTodo={addFunction}/>
+      <ul>
+        {todo.map((thingsTodo, index) => {
+          return (
+            <li>
+              <div key={`${index}`}>
+                <span>{thingsTodo.thingTodo}</span>
+                <Button whatTodo={deleteFunction} index={index}>
+                  Delete
+                </Button>
+                <Button whatTodo={doneFunction} index={index}>
+                  Done
+                </Button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
